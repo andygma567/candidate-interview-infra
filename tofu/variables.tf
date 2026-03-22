@@ -17,9 +17,9 @@ variable "droplet_image" {
 }
 
 variable "droplet_size" {
-  description = "Droplet size slug (CPU/RAM) for the interview VM. Defaults to a low-cost shared CPU 4 GB option."
+  description = "Droplet size slug (CPU/RAM) for the interview VM. Defaults to a low-cost shared CPU 8 GB option."
   type        = string
-  default     = "s-2vcpu-4gb"
+  default     = "s-4vcpu-8gb"
 }
 
 variable "volume_size_gb" {
