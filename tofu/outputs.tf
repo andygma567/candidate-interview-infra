@@ -1,16 +1,19 @@
-output "droplet_id" {
-  value       = digitalocean_droplet.interview_vm.id
-  description = "ID of the interview VM droplet."
+output "droplet_ids" {
+  value       = { for d in digitalocean_droplet.interview_vm : d.name => d.id }
+  description = "Map of interview VM droplet names to IDs."
 }
-output "droplet_ipv4_address" {
-  value       = digitalocean_droplet.interview_vm.ipv4_address
-  description = "Public IPv4 address of the interview VM."
+
+output "droplet_ipv4_addresses" {
+  value       = { for d in digitalocean_droplet.interview_vm : d.name => d.ipv4_address }
+  description = "Map of interview VM droplet names to public IPv4 addresses."
 }
-output "droplet_private_ip" {
-  value       = digitalocean_droplet.interview_vm.ipv4_address_private
-  description = "Private IPv4 address of the interview VM."
+
+output "droplet_private_ips" {
+  value       = { for d in digitalocean_droplet.interview_vm : d.name => d.ipv4_address_private }
+  description = "Map of interview VM droplet names to private IPv4 addresses."
 }
-output "volume_id" {
-  value       = digitalocean_volume.interview_storage.id
-  description = "ID of the block storage volume."
+
+output "volume_ids" {
+  value       = { for v in digitalocean_volume.interview_storage : v.name => v.id }
+  description = "Map of block storage volume names to IDs."
 }

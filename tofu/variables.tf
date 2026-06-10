@@ -4,10 +4,16 @@ variable "region" {
   default     = "nyc1"
 }
 
-variable "droplet_name" {
-  description = "Name of the interview VM droplet."
+variable "droplet_name_prefix" {
+  description = "Prefix for interview VM droplet names."
   type        = string
   default     = "interview-vm"
+}
+
+variable "droplet_count" {
+  description = "Number of interview VM droplets to create."
+  type        = number
+  default     = 3
 }
 
 variable "droplet_image" {
@@ -17,15 +23,15 @@ variable "droplet_image" {
 }
 
 variable "droplet_size" {
-  description = "Droplet size slug (CPU/RAM) for the interview VM. Defaults to a low-cost shared CPU 8 GB option."
+  description = "Droplet size slug (CPU/RAM) for the interview VM."
   type        = string
   default     = "s-4vcpu-8gb"
 }
 
 variable "volume_size_gb" {
-  description = "Size in GB of the raw block storage volume attached to the interview VM."
+  description = "Size in GB of the block storage volume attached to each interview VM."
   type        = number
-  default     = 10
+  default     = 1
 }
 
 variable "enable_monitoring" {
