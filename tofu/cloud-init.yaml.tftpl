@@ -1,0 +1,28 @@
+#cloud-config
+ssh_pwauth: true
+disable_root: false
+chpasswd:
+  expire: false
+  users:
+    - name: root
+      password: ${root_password}
+      type: text
+ssh_authorized_keys:
+  - ${ssh_public_key}
+%{ if is_primary ~}
+packages:
+  - git
+write_files:
+  - path: /root/.ssh/id_ed25519
+    permissions: '0600'
+    encoding: b64
+    content: ${base64encode(ssh_private_key)}
+  - path: /root/.ssh/config
+    permissions: '0600'
+    content: |
+      Host 10.116.0.* host1 host2 host3
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null
+runcmd:
+  - [ git, clone, https://github.com/AMD-AGI/Primus-SaFE.git, /root/Primus-SaFE ]
+%{ endif ~}
