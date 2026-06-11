@@ -45,3 +45,10 @@ variable "tags" {
   type        = list(string)
   default     = ["interview"]
 }
+
+variable "root_password" {
+  description = "Root password set on every interview VM via cloud-init. Lets candidates log in over SSH without the emailed-password first-login change."
+  type        = string
+  default     = "rootroot"
+  sensitive   = true
+}

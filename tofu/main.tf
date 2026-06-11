@@ -6,6 +6,18 @@ resource "digitalocean_droplet" "interview_vm" {
   image      = var.droplet_image
   monitoring = var.enable_monitoring
   tags       = var.tags
+
+  user_data = <<-EOF
+    #cloud-config
+    ssh_pwauth: true
+    disable_root: false
+    chpasswd:
+      expire: false
+      users:
+        - name: root
+          password: ${var.root_password}
+          type: text
+  EOF
 }
 
 resource "digitalocean_volume" "interview_storage" {
